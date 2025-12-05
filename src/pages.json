@@ -1,0 +1,85 @@
+{
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"router-navigate": "uniapp-router-next/components/router-navigate/router-navigate.vue",
+			"^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue"
+		}
+	},
+	"pages": [
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/hall/index",
+			"style": {
+				"navigationBarTitleText": "大厅"
+			}
+		},
+		{
+			"path": "pages/match/index",
+			"style": {
+				"navigationBarTitleText": "匹配中"
+			}
+		},
+		{
+			"path": "pages/table/index",
+			"style": {
+				"navigationBarTitleText": "牌桌"
+			}
+		},
+		{
+			"path": "pages/replay/index",
+			"style": {
+				"navigationBarTitleText": "复盘"
+			}
+		},
+		{
+			"path": "pages/records/index",
+			"style": {
+				"navigationBarTitleText": "对局记录"
+			}
+		},
+		{
+			"path": "pages/profile/index",
+			"style": {
+				"navigationBarTitleText": "个人信息"
+			}
+		},
+		{
+			"path": "pages/agent/index",
+			"style": {
+				"navigationBarTitleText": "代理中心"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "打旋牌",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/hall/index",
+				"text": "大厅",
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/home-active.png"
+			},
+			{
+				"pagePath": "pages/profile/index",
+				"text": "我的",
+				"iconPath": "static/tabbar/my.png",
+				"selectedIconPath": "static/tabbar/my-active.png"
+			}
+		]
+	}
+}

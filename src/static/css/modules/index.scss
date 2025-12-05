@@ -1,0 +1,142 @@
+.d-flex {
+	display: flex;
+}
+.flex-1 {
+	flex: 1;
+}
+.flex-center {
+	justify-content: center;
+	align-items: center;
+}
+.flex-between {
+	justify-content: space-between;
+	align-items: center;
+}
+.flex-around {
+	justify-content: space-around;
+	align-items: center;
+}
+.flex-end {
+	justify-content: flex-end;
+	align-items: center;
+}
+.flex-start {
+	justify-content: flex-start;
+	align-items: center;
+}
+.ai-center {
+	align-items: center;
+}
+.ai-start {
+	align-items: flex-start;
+}
+.ai-end {
+	align-items: flex-end;
+}
+.jc-center {
+	justify-content: center;
+}
+.jc-start {
+	justify-content: flex-start;
+}
+.jc-end {
+	justify-content: flex-end;
+}
+.jc-between {
+	justify-content: space-between;
+}
+.jc-around {
+	justify-content: space-around;
+}
+.flex-column {
+	flex-direction: column;
+}
+.flex-row {
+	flex-direction: row;
+}
+.flex-wrap {
+	flex-wrap: wrap;
+}
+.w50 {
+	width: 50%;
+}
+.w100 {
+	width: 100%;
+}
+.h50 {
+	height: 50%;
+}
+.h100 {
+	height: 100%;
+}
+.radius-12 {
+	border-radius: 12rpx;
+}
+.radius-8 {
+	border-radius: 8rpx;
+}
+.radius-4 {
+	border-radius: 4rpx;
+}
+.radius-2 {
+	border-radius: 2rpx;
+}
+.radius-50 {
+	border-radius: 50%;
+}
+// 超出省略
+.ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.ellipsis-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+// 循环生成 margin padding
+@for $i from 0 through 60 {
+  .m-#{$i} {
+    margin: $i + px !important;
+  }
+
+  .mt-#{$i} {
+    margin-top: $i + px !important;
+  }
+
+  .mb-#{$i} {
+    margin-bottom: $i + px !important;
+  }
+
+  .ml-#{$i} {
+    margin-left: $i + px !important;
+  }
+
+  .mr-#{$i} {
+    margin-right: $i + px !important;
+  }
+
+  .p-#{$i} {
+    padding: $i + px !important;
+  }
+
+  .pt-#{$i} {
+    padding-top: $i + px !important;
+  }
+
+  .pb-#{$i} {
+    padding-bottom: $i + px !important;
+  }
+
+  .pl-#{$i} {
+    padding-left: $i + px !important;
+  }
+
+  .pr-#{$i} {
+    padding-right: $i + px !important;
+  }
+}
