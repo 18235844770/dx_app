@@ -4,6 +4,7 @@
       v-for="action in actions"
       :key="action.type"
       :disabled="!can(action.type)"
+      :class="{ highlight: props.highlight === action.type }"
       @click="$emit(action.event)"
     >
       {{ action.label }}
@@ -16,11 +17,14 @@ import { ActionType } from '@/types/game';
 
 const props = defineProps<{
   allowed: ActionType[];
+  highlight?: ActionType | null;
+  pending?: string[];
 }>();
 
 defineEmits(['fold', 'pass', 'call', 'raise', 'knock', 'ready']);
 
-const can = (a: ActionType) => props.allowed.includes(a);
+const isPending = (a: ActionType) => (props.pending || []).includes(a);
+const can = (a: ActionType) => props.allowed.includes(a) && !isPending(a);
 
 const actions = [
   { type: 'fold', label: '弃牌', event: 'fold' },
@@ -56,5 +60,9 @@ button {
 button:disabled {
   opacity: 0.4;
 }
-</style>
 
+.highlight {
+  background: linear-gradient(90deg, #ffcf4d, #ff8c37);
+  box-shadow: 0 4rpx 16rpx rgba(255, 140, 55, 0.35);
+}
+</style>

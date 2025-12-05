@@ -7,7 +7,6 @@ export interface MatchStatus {
   tableId?: number;
   matchId?: number;
   joinedAt?: string;
-  estimatedTime?: number;
 }
 
 export interface JoinMatchPayload {
@@ -22,4 +21,3 @@ export interface JoinMatchResponse {
   status: MatchQueueStatus;
   sceneId?: number;
 }
-

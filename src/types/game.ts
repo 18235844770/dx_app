@@ -2,6 +2,8 @@ export type ActionType =
   | 'pass' | 'call' | 'raise' | 'knock_bobo'
   | 'fold' | 'ready' | 'rejoin' | 'ping';
 
+export type Phase = 'waiting' | 'playing' | 'settling' | 'ended';
+
 export interface WSMessage {
   type: 'state' | 'error' | 'pong' | 'log';
   seq: number;
@@ -15,7 +17,7 @@ export interface WSAction {
 
 export interface SeatDTO {
   seatIndex: number;
-  userId: string;
+  userId: number;
   alias: string;
   chips: number;
   avatar?: string;
@@ -28,9 +30,20 @@ export interface LogItem {
   content: string;
 }
 
+export type FeedType = 'system' | 'action' | 'warning' | 'result';
+
+export interface FeedItem {
+  id: string;
+  type: FeedType;
+  text: string;
+  ts: number;
+  seq?: number;
+}
+
 export interface TableState {
   tableId: string;
-  round: 1 | 2 | 3;
+  phase: Phase;
+  round: number;
   turnSeat: number;
   lastRaise: number;
   mangoStreak: number;
