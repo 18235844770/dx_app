@@ -15,7 +15,7 @@ import { SeatDTO } from '@/types/game';
 
 const props = defineProps<{
   seats: SeatDTO[];
-  mySeatId?: string;
+  mySeatId?: number | string;
 }>();
 
 const decoratedSeats = computed(() =>
@@ -35,4 +35,3 @@ const decoratedSeats = computed(() =>
   row-gap: 32rpx;
 }
 </style>
-

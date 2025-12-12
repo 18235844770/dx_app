@@ -22,6 +22,8 @@ export interface SeatDTO {
   chips: number;
   avatar?: string;
   status: 'waiting' | 'playing' | 'folded' | 'eliminated';
+  bet?: number;
+  split?: { head?: string[]; tail?: string[] };
 }
 
 export interface LogItem {
@@ -53,5 +55,5 @@ export interface TableState {
   myCards: string[]; // "**" or real
   logs: LogItem[];
   result?: any; // For settlement
+  pot?: number;
 }
-

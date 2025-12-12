@@ -14,7 +14,8 @@ export const useTableStore = defineStore('table', {
     feed: [] as FeedItem[],
     lastFeedSeq: 0,
     pendingActions: new Set<string>(),
-    reconnectExhausted: false
+    reconnectExhausted: false,
+    seenLogIds: new Set<string>()
   }),
   actions: {
     setTable(id: string) {
@@ -46,9 +47,30 @@ export const useTableStore = defineStore('table', {
       if (!this.tableId) {
         this.tableId = s.tableId;
       }
-      this.state = s;
+      this.state = {
+        ...s,
+        mangoStreak: s.mangoStreak ?? 0,
+        logs: s.logs || []
+      };
+       // 将日志推入 feed，避免重复
+      if (Array.isArray(s.logs)) {
+        this.addLogs(s.logs);
+      }
       // 服务端状态到达后，认为此前提交的动作已处理
       this.pendingActions.clear();
+    },
+    addLogs(logs: LogItem[]) {
+      logs.forEach((log) => {
+        if (!log || !log.id) return;
+        if (this.seenLogIds.has(log.id)) return;
+        this.seenLogIds.add(log.id);
+        this.enqueueFeed({
+          id: log.id,
+          type: 'action',
+          text: log.content,
+          ts: log.timestamp || Date.now()
+        });
+      });
     },
     appendLog(log: LogItem) {
       if (!this.state) return;
@@ -57,6 +79,7 @@ export const useTableStore = defineStore('table', {
         ...this.state,
         logs: [...logs, log].slice(-50)
       };
+      this.addLogs([log]);
     },
     enqueueFeed(item: FeedItem) {
       feedBuffer.push(item);
@@ -78,6 +101,7 @@ export const useTableStore = defineStore('table', {
       this.lastFeedSeq = 0;
       this.pendingActions.clear();
       this.reconnectExhausted = false;
+      this.seenLogIds.clear();
       feedBuffer.splice(0, feedBuffer.length);
       if (flushTimer) {
         clearTimeout(flushTimer);

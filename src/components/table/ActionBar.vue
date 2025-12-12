@@ -1,7 +1,7 @@
 <template>
   <view class="action-bar">
     <button
-      v-for="action in actions"
+      v-for="action in visibleActions"
       :key="action.type"
       :disabled="!can(action.type)"
       :class="{ highlight: props.highlight === action.type }"
@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import { ActionType } from '@/types/game';
+import { computed } from 'vue';
 
 const props = defineProps<{
   allowed: ActionType[];
@@ -26,14 +27,21 @@ defineEmits(['fold', 'pass', 'call', 'raise', 'knock', 'ready']);
 const isPending = (a: ActionType) => (props.pending || []).includes(a);
 const can = (a: ActionType) => props.allowed.includes(a) && !isPending(a);
 
-const actions = [
+const baseActions = [
   { type: 'fold', label: '弃牌', event: 'fold' },
   { type: 'pass', label: '过牌', event: 'pass' },
   { type: 'call', label: '跟注', event: 'call' },
   { type: 'raise', label: '加注', event: 'raise' },
-  { type: 'knock_bobo', label: '敲波波', event: 'knock' },
+  { type: 'knock_bobo', label: '敲', event: 'knock' },
   { type: 'ready', label: '准备', event: 'ready' }
-];
+] as const;
+
+const visibleActions = computed(() =>
+  baseActions.filter((a) => {
+    if (a.type === 'knock_bobo') return props.allowed.includes('knock_bobo');
+    return true;
+  })
+);
 </script>
 
 <style lang="scss" scoped>
